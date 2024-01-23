@@ -1,9 +1,9 @@
 <script>
-   import People from './People.svelte';
+   import CharacterPanel from './CharacterPanel.svelte';
 </script>
 
 <main>
-  <People />
+  <CharacterPanel />
 </main>
 
 <style>

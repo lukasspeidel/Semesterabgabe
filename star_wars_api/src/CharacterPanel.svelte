@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
 
   let people = [];
+  let selectedGender = 'all'; // Default value, 'all' means no filter
 
   async function fetchData() {
     try {
@@ -51,12 +52,32 @@
   onMount(() => {
     fetchData();
   });
+
+  function filterByGender(person) {
+    if (selectedGender === 'all') {
+      return true; // Show all characters when no filter is selected
+    } else {
+      return person.gender === selectedGender;
+    }
+  }
 </script>
+
+<!-- Dropdown menu for selecting gender -->
+<label for="genderFilter">Filter by Gender:</label>
+<select id="genderFilter" bind:value={selectedGender}>
+  <option value="all">All</option>
+  <option value="male">Male</option>
+  <option value="female">Female</option>
+  <option value="n/a">N/A</option>
+  <option value="hermaphrodite">Hermaphrodite</option>
+  <!-- Add more options based on your dataset -->
+</select>
 
 <main>
   <div id="character-panel-container">
-    {#each people as person (person.url)}
+    {#each people.filter(filterByGender) as person (person.name)}
       <div class="character-panel">
+        <img src="https://starwars-visualguide.com/assets/img/characters/{person.name}.jpg" alt="{person.name}" />
         <p>Name: {person.name}</p>
         <p>Age: {person.birth_year}</p>
         {#if person.homeworldName}
