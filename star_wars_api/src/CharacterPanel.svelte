@@ -77,7 +77,7 @@
   <div id="character-panel-container">
     {#each people.filter(filterByGender) as person (person.name)}
       <div class="character-panel">
-        <img src="https://starwars-visualguide.com/assets/img/characters/{person.name}.jpg" alt="{person.name}" />
+<!--         <img src="https://starwars-visualguide.com/assets/img/characters/1.jpg" alt="{person.name}" /> -->
         <p>Name: {person.name}</p>
         <p>Age: {person.birth_year}</p>
         {#if person.homeworldName}
