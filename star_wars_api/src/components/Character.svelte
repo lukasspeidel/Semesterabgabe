@@ -36,23 +36,40 @@
     <div class="character-panel">
         <!-- Display character image using the specified source -->
         <div class="character-image"><img src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt={name} /></div>
-        <p>ID: {id}</p>
+
         <p>Name: {name}</p>
-        <p>Age: {birth_year}</p>
+        <p>Birth Year: {birth_year}</p>
         <p>Home Planet: {homeworld}</p>
-        <hr />
+
     </div>
+
 </main>
 
+
+
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Jura:wght@300&display=swap');
+
     .character-panel {
-        width: 200px;
-        height: 600px; /* Adjusted height for better image display */
+        width: 240px;
+        height: 470px; 
+        font-family: 'Jura', sans-serif;
+        font-size: 1.2em;
+        background-color: #272727;
+        border-radius: 1.2em;
+        font-weight: bold;
+        text-align: center;
+        color: white;
     }
 
     img {
         width: 100%;
-        height: 80%; /* Adjusted height for better image display */
+        height: 80%; 
         object-fit: cover;
+        border-radius: 1.2em 1.2em 0 0;
+    }
+
+    p {
+        margin: 0.5em;
     }
 </style>

@@ -2,7 +2,6 @@
 <script>
   import { onMount, afterUpdate } from 'svelte';
   import Character from '../components/Character.svelte';
-  import Button from '../components/Button.svelte';
 
   let people = [];
   let displayedPeople = [];
@@ -80,6 +79,9 @@
   }
 </script>
 
+
+<header>
+  <h1>Star Wars Characters</h1>
 <!-- Dropdown menu for selecting gender -->
 <label for="genderFilter">Filter by Gender:</label>
 <select id="genderFilter" bind:value={selectedGender}>
@@ -90,6 +92,11 @@
   <option value="hermaphrodite">Hermaphrodite</option>
   <!-- Add more options based on your dataset -->
 </select>
+  <!-- Load more button -->
+  {#if startIndex + chunkSize < people.length}
+    <button class="LoadMoreButton" on:click={loadMorePeople}>Load More</button>
+  {/if}
+</header>
 
 <main>
   <div id="character-panel-container">
@@ -104,25 +111,85 @@
     {/each}
   </div>
 
-
- <!-- Load more button -->
- {#if startIndex + chunkSize < people.length}
- <button on:click={loadMorePeople}>Load More</button>
-{/if}
+  <img id="background-image" src="https://cdn.mos.cms.futurecdn.net/8vM5KTsVVLgCCxFwWwYLfG.jpg" alt="hyperspace" />
 </main>
 
 <style>
+
+
   #character-panel-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 10px;
+    font-family: 'Jura', sans-serif;
   }
 
   main {
+    padding-top: 120px; /* Add padding to the top of the main content to account for the fixed header */
     max-width: 800px;
     margin: 0 auto;
+    font-family: 'Jura', sans-serif;
   }
-</style>
 
-<!-- idk what to do with this -->
+  #genderFilter {
+    margin-bottom: 1em;
+  }
+
+  .LoadMoreButton {
+    background-color: #BE8900;
+    color: white;
+    height: 40px;
+    width: 240px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Jura', sans-serif;
+    font-weight: 800;
+  }
+
+  #genderFilter {
+    background-color: #BE8900;
+    color: white;
+    height: 40px;
+    width: 240px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Jura', sans-serif;
+    font-weight: 400;
+  }
+
+  header {
+    padding: 10%;
+    position: fixed;
+    top: 0;
+    height: 70px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #272727;
+    color: white;
+    font-family: 'Jura', sans-serif;
+    font-weight: 800;
+    z-index: 1000; /* Set a high z-index to ensure the header appears above other elements */
+  }
+  
+  #background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Set a lower z-index to ensure the background is behind other elements */
+    object-fit: cover; /* Cover the entire viewport */
+  }
+
+</style>
