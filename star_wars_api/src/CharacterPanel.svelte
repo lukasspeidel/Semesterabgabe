@@ -1,6 +1,7 @@
 <!-- People.svelte -->
 <script>
   import { onMount, afterUpdate } from 'svelte';
+  import Character from './components/Character.svelte';
 
   let people = [];
   let displayedPeople = [];
@@ -31,13 +32,13 @@
         currentPage++;
       }
 
-      // Fetch homeworld information for each person
+/*       // Fetch homeworld information for each person
       const homeworldsData = await Promise.all(people.map(person => fetchHomeworld(person)));
 
       // Update homeworldName property based on fetched data
       homeworldsData.forEach((homeworld, index) => {
         people[index].homeworldName = homeworld.name;
-      });
+      }); */
 
       // Initial display of 10 people
       displayedPeople = people.slice(startIndex, startIndex + chunkSize);
@@ -100,19 +101,13 @@
 <main>
   <div id="character-panel-container">
     {#each displayedPeople.filter(filterByGender) as person (person.id)}
-      <div class="character-panel">
-        <!-- Display character image using the specified source -->
-        <div class="character-image"><img src={`https://starwars-visualguide.com/assets/img/characters/${person.id}.jpg`} alt={person.name} /></div>
-        <p>ID: {person.id}</p>
-        <p>Name: {person.name}</p>
-        <p>Age: {person.birth_year}</p>
-        {#if person.homeworldName}
-          <p>Home Planet: {person.homeworldName}</p>
-        {:else}
-          <p>Home Planet: Unknown</p>
-        {/if}
-        <hr />
-      </div>
+      <Character
+        id={person.id}
+        name={person.name}
+        birth_year={person.birth_year}
+        homeworld={person.homeworldName}
+        imageurl={`https://starwars-visualguide.com/assets/img/characters/${person.id}.jpg`}
+      />
     {/each}
   </div>
 
@@ -127,26 +122,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    gap: 10px;
   }
 
   main {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
   }
 
-  .character-panel {
-    width: 200px;
-    height: 600px; /* Adjusted height for better image display */
-  }
 
-  img {
-    width: 100%;
-    height: 80%; /* Adjusted height for better image display */
-    object-fit: cover;
-  }
-
-  .character-image {
-    height: 400px; /* Adjusted height for better image display */
-    width: 200px;
-  }
 </style>
