@@ -81,14 +81,13 @@
 
 
 <header>
-  <h1>Star Wars Characters</h1>
+  <h1 class="headerText">Star Wars Characters</h1>
 <!-- Dropdown menu for selecting gender -->
 <label for="genderFilter">Filter by Gender:</label>
 <select id="genderFilter" bind:value={selectedGender}>
   <option value="all">All</option>
   <option value="male">Male</option>
   <option value="female">Female</option>
-  <option value="n/a">N/A</option>
   <option value="hermaphrodite">Hermaphrodite</option>
   <!-- Add more options based on your dataset -->
 </select>
@@ -148,9 +147,11 @@
     cursor: pointer;
     font-family: 'Jura', sans-serif;
     font-weight: 800;
+
   }
 
   #genderFilter {
+    margin-top: 9px;
     background-color: #BE8900;
     color: white;
     height: 40px;
@@ -165,22 +166,26 @@
   }
 
   header {
-    padding: 10%;
-    position: fixed;
-    top: 0;
-    height: 70px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: #272727;
-    color: white;
-    font-family: 'Jura', sans-serif;
-    font-weight: 800;
-    z-index: 1000; /* Set a high z-index to ensure the header appears above other elements */
-  }
+  padding-left: 10px;
+  padding-right: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #272727;
+  color: white;
+  font-family: 'Jura', sans-serif;
+  font-weight: 800;
+  z-index: 1000;
+}
+
+.headerText {
+  margin-bottom: 28px;
+}
+
   
   #background-image {
     position: fixed;
@@ -191,5 +196,49 @@
     z-index: -1; /* Set a lower z-index to ensure the background is behind other elements */
     object-fit: cover; /* Cover the entire viewport */
   }
+
+  header label,
+header select {
+  margin-bottom: 10px;
+}
+
+header .LoadMoreButton {
+  margin-bottom: 9px;
+}
+
+@media only screen and (min-width: 800px) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  header h1 {
+    margin-bottom: 0;
+  }
+
+  header label,
+  header select {
+    margin: 0;
+  }
+
+  header .LoadMoreButton {
+    margin-top: 0;
+    margin-right: 0;
+  }
+
+  #character-panel-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  }
+
+  .LoadMoreButton {
+    margin-top: 0;
+    margin-right: 0;
+  }
+}
+
 
 </style>
