@@ -1,7 +1,8 @@
 <!-- People.svelte -->
 <script>
   import { onMount, afterUpdate } from 'svelte';
-  import Character from './components/Character.svelte';
+  import Character from '../components/Character.svelte';
+  import Button from '../components/Button.svelte';
 
   let people = [];
   let displayedPeople = [];
@@ -31,14 +32,6 @@
 
         currentPage++;
       }
-
-/*       // Fetch homeworld information for each person
-      const homeworldsData = await Promise.all(people.map(person => fetchHomeworld(person)));
-
-      // Update homeworldName property based on fetched data
-      homeworldsData.forEach((homeworld, index) => {
-        people[index].homeworldName = homeworld.name;
-      }); */
 
       // Initial display of 10 people
       displayedPeople = people.slice(startIndex, startIndex + chunkSize);
@@ -111,10 +104,11 @@
     {/each}
   </div>
 
-  <!-- Load more button -->
-  {#if startIndex + chunkSize < people.length}
-    <button on:click={loadMorePeople}>Load More</button>
-  {/if}
+
+ <!-- Load more button -->
+ {#if startIndex + chunkSize < people.length}
+ <button on:click={loadMorePeople}>Load More</button>
+{/if}
 </main>
 
 <style>
@@ -129,6 +123,4 @@
     max-width: 800px;
     margin: 0 auto;
   }
-
-
 </style>
